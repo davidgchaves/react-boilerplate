@@ -1,5 +1,6 @@
 import React from "react";
 
+/*
 const membersMock = [
   {
     login: "Nasdan",
@@ -12,9 +13,19 @@ const membersMock = [
     avatar_url: "https://avatars.githubusercontent.com/u/43609530?v=4",
   },
 ];
+*/
 
 export const App = () => {
-  const [members] = React.useState(membersMock);
+  const [members, setMembers] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch('https://api.github.com/orgs/lemoncode/members')
+      .then(r => {
+        if (r.ok) { return r.json(); }
+      })
+      .then(json => { setMembers(json) })
+      .catch(console.error);
+  }, []);
 
   return (
     <div className="user-list-container">
