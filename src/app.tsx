@@ -1,22 +1,10 @@
 import React from "react";
+import { MemberEntity } from './model';
 
-/*
-const membersMock = [
-  {
-    login: "Nasdan",
-    id: 4374977,
-    avatar_url: "https://avatars.githubusercontent.com/u/4374977?v=4",
-  },
-  {
-    login: "v-borrego",
-    id: 43609530,
-    avatar_url: "https://avatars.githubusercontent.com/u/43609530?v=4",
-  },
-];
-*/
+import { MemberTableRow } from './member-table-row';
 
 export const App = () => {
-  const [members, setMembers] = React.useState([]);
+  const [members, setMembers] = React.useState<MemberEntity[]>([]);
 
   React.useEffect(() => {
     fetch('https://api.github.com/orgs/lemoncode/members')
@@ -33,11 +21,7 @@ export const App = () => {
       <span className="header">Id</span>
       <span className="header">Name</span>
       {members.map((member) => (
-        <React.Fragment key={member.id}>
-          <img src={member.avatar_url} />
-          <span>{member.id}</span>
-          <span>{member.login}</span>
-        </React.Fragment>
+        <MemberTableRow key={member.id} member={member} />
       ))}
     </div>
   );
