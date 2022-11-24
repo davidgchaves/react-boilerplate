@@ -2,6 +2,7 @@ import React from "react";
 import { MemberEntity } from './model';
 
 import { MemberTableRow } from './member-table-row';
+import { MemberTableHeader } from "./member-table-header";
 
 export const App = () => {
   const [members, setMembers] = React.useState<MemberEntity[]>([]);
@@ -17,9 +18,7 @@ export const App = () => {
 
   return (
     <div className="user-list-container">
-      <span className="header">Avatar</span>
-      <span className="header">Id</span>
-      <span className="header">Name</span>
+      <MemberTableHeader />
       {members.map((member) => (
         <MemberTableRow key={member.id} member={member} />
       ))}
